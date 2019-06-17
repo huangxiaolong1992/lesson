@@ -5,7 +5,18 @@ exports.reportComment = (req,res)=> {
     const content = req.body.content;
     const userCode = req.body.userCode;
     const userName = req.body.userName;
+    const commentNum = parseInt(req.body.commentNum) + 1;
+    const avatar = req.body.avatar;
     const time = common.timestampToTime(Date.parse(new Date()));
+    
+    new utils.DbOperate(lesson, {_id : lessonId} , { commentNum : commentNum }).update().then((v)=>{
+        if(v.code == 200){
+            console.log(`${common.timestampToTime(Date.parse(new Date()))}, 更新评论成功`);
+        }else{
+            console.log(`${common.timestampToTime(Date.parse(new Date()))}, 更新评论失败`);
+        }
+    })
+
     new utils.DbOperate(comment,
      {
      	lessonId : lessonId,
@@ -16,7 +27,8 @@ exports.reportComment = (req,res)=> {
      	deleteable : true,
      	//isThumbup : true,
      	thumbupNum : 0,
-     	time : time
+     	time : time,
+        avatar : avatar
      }
     )
     .create().then((v)=>{

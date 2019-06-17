@@ -9,9 +9,10 @@ exports.createCollection = (req,res)=> {
     const lessonVideo = req.body.lessonVideo;
     const faceImg  =  req.body.faceImg;
     const title  = req.body.title;
+    const type = req.body.type;
     const collectNum = parseInt(req.body.collectNum) + 1;
     const time = common.timestamp(Date.parse(new Date()));
-
+    
     //更新课程的收藏数量
     new utils.DbOperate(lesson, {_id : lessonId} , { collectNum : collectNum }).update().then((v)=>{
     	if(v.code == 200){
@@ -33,12 +34,13 @@ exports.createCollection = (req,res)=> {
         faceImg  : faceImg,
         title    : title,
         collectNum : collectNum,
+        type : type,
         time : time
      }
     )
     .create().then((v)=>{
     	if(v.code == 200){
-	    	res.json(v)
+	        res.json(v)
     	}else{
     		console.log(`${common.timestampToTime(Date.parse(new Date()))}, 创建收藏失败`);
     	}

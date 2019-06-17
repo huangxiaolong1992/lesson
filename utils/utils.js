@@ -44,6 +44,7 @@ class DbOperate {
 
     async query () { 
         let result = await this.collection.find(this.params).limit(this.num).sort(this.sort);
+       
 
         try{
             return this.doSuccess("查询成功", result);

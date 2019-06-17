@@ -10,6 +10,7 @@ exports.rank = (req,res)=> {
                 userCode   : result[i].userCode,
                 userName   : result[i].userName,
                 department : result[i].department,
+                avatar     : result[i].avatar,
                 times      : result[i].len
             })
         }

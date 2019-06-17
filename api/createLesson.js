@@ -40,7 +40,8 @@ exports.createLesson = (req,res)=> {
         collectNum : 0,
         isCollected: false,
         isThumbup  : false,
-     	time       : time
+     	time       : time,
+        isStudy    : false
      }
     )
     .create().then((v)=>{

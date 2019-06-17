@@ -21,14 +21,19 @@
     return Y+M+D;
   }  
   //获取7天的时间
-  function getprevDay(params) {
+  function getprevDay(params,type) {
     var date =  new Date();
     var Y    =  date.getFullYear() + '-';
     var M    =  (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
     var m    =  date.getMinutes() < 10 ? '0'+ date.getMinutes() : date.getMinutes();
     var D    =  date.getDate() < 10 ? '0'+ parseInt(date.getDate()+ params)  : parseInt(date.getDate() + params)  + ' ';
     var h    =  ' ' + date.getHours() < 10  ? ' 0'+ date.getHours()+':' : date.getHours() +':';
-    return Y+M+D;
+    if(type == 0){
+      return Y+M+D;
+    }else{
+      return M+D;
+    }
+    
   } 
 
   //统计值出现的次数
@@ -40,6 +45,7 @@
           userCode   : item.userCode,
           userName   : item.userName,
           department : item.department,
+          avatar     : item.avatar,
           len: 1
         }
       } else {

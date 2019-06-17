@@ -1,10 +1,9 @@
 exports.analysis = (req,res)=> { 
 	const collection = global.dbHelper.getModel('collection'); 
     const rank = global.dbHelper.getModel('rank'); 
-    const nowDay = common.getprevDay(1);
-    const prevDay= common.getprevDay(-7);
+    const nowDay = common.getprevDay(1,0);
+    const prevDay= common.getprevDay(-7,0);
     const type = req.query.type;  //0代表学习量，1代表收藏量
-    console.log(type == 0)
     const table = type == 0 ? rank : collection;
     new utils.DbOperate(table, {"$and":[{"time":{"$gt":prevDay}},{"time":{"$lt":nowDay}}]}).query().then((v)=>{
     	if(v.code == 200){
@@ -18,9 +17,9 @@ exports.analysis = (req,res)=> {
 
             let data = JSON.stringify(time);
             for(var i = 6 ; i > -1 ; i--){
-                timeArr.push(common.getprevDay(-i))
+                timeArr.push(common.getprevDay(-i,1))
                 try{
-                    dataArr.push(eval("data.match(/"+common.getprevDay(-i)+"/ig).length"));
+                    dataArr.push(eval("data.match(/"+common.getprevDay(-i,0)+"/ig).length"));
                 }catch(err){
                     dataArr.push(0);
                 }   

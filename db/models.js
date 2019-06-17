@@ -29,6 +29,7 @@ module.exports = {
 		isCollected: Boolean,
 		isThumbup  : Boolean,
 		time       : String,
+		isStudy  : Boolean
 	},
 	//点赞
 	thumbup : {
@@ -45,14 +46,16 @@ module.exports = {
         faceImg  : String,
         title    : String,
         collectNum : Number,
-        time : String
+        time : String,
+        type : Number
 	},
 	rank : {
 		userCode   : String,
 		userName   : String,
 		department : String,
 		lessonId   : String,
-		time :       String
+		time :       String,
+		avatar : String
 	},
 	smallcategorie: {
 		parentId   : String,
@@ -89,6 +92,7 @@ module.exports = {
         child : Array,
         time : String,
         thumbupNum: Number,
+        avatar : String,
         deleteable : Boolean,
 	},
 	reply: {

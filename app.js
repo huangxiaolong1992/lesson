@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');  
 const mongoose = require("mongoose");
-
+//global.request = require("request");
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb',extended: true }));
@@ -126,7 +126,6 @@ app.get("/v1/mobile/hotOrNew", hotOrNew.hotOrNew);
 
  app.get("/v1/mobile/rank", rank.rank);
 
-
  
  /*
  * @description  收藏列表
@@ -215,6 +214,42 @@ const broadcastVideo = require("./api/broadcastVideo");
 app.put("/v1/mobile/broadcastVideo", broadcastVideo.broadcastVideo);
 
 
+/*
+ *@description 清空历史
+ *@method update
+ */
+const clearHistory = require("./api/clearHistory");
+
+app.delete("/v1/mobile/clearHistory", clearHistory.clearHistory);
+
+/*
+ *@description 删除历史
+ *@method update
+ */
+const deleteHistory = require("./api/deleteHistory");
+
+app.delete("/v1/mobile/deleteHistory", deleteHistory.deleteHistory);
+
+
+
+/*
+ *@description 删除收藏
+ *@method update
+ */
+const deleteCollection = require("./api/deleteCollection");
+
+app.delete("/v1/mobile/deleteCollection", deleteCollection.deleteCollection);
+
+
+/*
+ *@description 清空收藏
+ *@method update
+ */
+const clearCollection = require("./api/clearCollection");
+
+app.delete("/v1/mobile/clearCollection", clearCollection.clearCollection);
+
+
  //pc 端接口
  
  /*
@@ -257,7 +292,9 @@ app.put("/v1/mobile/broadcastVideo", broadcastVideo.broadcastVideo);
   */
 const analysis = require("./api/analysis");
 
- app.get("/v1/analysis", analysis.analysis);
+app.get("/v1/analysis", analysis.analysis);
+
+
 
 
  app.listen(8000);

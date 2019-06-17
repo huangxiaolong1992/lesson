@@ -1,16 +1,15 @@
 exports.deleteLesson = (req,res)=> { 
 	const lesson = global.dbHelper.getModel('lesson'); 
 	const lessonId = req.body.lessonId;
+
+    for(var i = 0 , len = lessonId.length ; i < len ; i++){
+        new utils.DbOperate(lesson, {_id:lessonId}).delete().then((v)=>{
+            
+        })
+    }
     
-    new utils.DbOperate(lesson, {_id:lessonId}).delete().then((v)=>{
-    	if(v.code == 200){
-	    	res.json(v)
-    	}else{
-    		console.log(`${common.timestampToTime(Date.parse(new Date()))}, 回复评论失败`);
-            res.json({
-                msg : '服务异常',
-                code: 500
-            })
-    	}
+    res.json({
+        code : 200,
+        msg : "删除成功"
     })
 }

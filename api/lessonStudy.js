@@ -5,6 +5,7 @@ exports.lessonStudy = (req,res)=> {
     const userCode = req.body.userCode;
     const userName = req.body.userName;
     const department = req.body.department;
+    const avatar = req.body.avatar;
     const time = common.timestamp(Date.parse(new Date()));
     new utils.DbOperate(rank, { userCode : userCode , lessonId : lessonId }).query().then((v)=>{
         if(v.result.length == 0){
@@ -14,7 +15,8 @@ exports.lessonStudy = (req,res)=> {
                 lessonId   : lessonId,
                 userName   : userName,
                 department : department,
-                time       : time
+                time       : time,
+                avatar     : avatar
              }).create().then((v)=>{
                 res.json(v)
             })
